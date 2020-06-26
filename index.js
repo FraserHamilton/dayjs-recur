@@ -40,16 +40,12 @@ export default (option, dayjsClass, dayjsFactory) => {
   //     return new Recur({ start: start, end: end })
   //   }
 
+  dayjsClass.prototype.monthWeekByDay = function () {
+    return Math.floor((this.date() - 1) / 7)
+  }
+
   // Plugin for removing all time information from a given date
   dayjsClass.prototype.dateOnly = function () {
     return this.startOf('day').add(this.utcOffset(), 'minute').utc()
   }
-  //   dayjsClass.dateOnly = function () {
-  //     return this.hours(0)
-  //       .minutes(0)
-  //       .seconds(0)
-  //       .milliseconds(0)
-  //       .add(this.utcOffset(), 'minute')
-  //       .utcOffset(0)
-  //   }
 }
