@@ -9,6 +9,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "build": "rollup --config",
+    "minify": "terser build/index.js --compress --mangle --output index.min.js",
+    "build:minify": "yarn build && yarn minify",
+    "test": "jest --watch"
+  },
   "dependencies": {
     "dayjs": "^1.8.28",
     "moment": "^2.27.0",
