@@ -1,7 +1,9 @@
 import utc from 'dayjs/plugin/utc'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
 
 export default (option, dayjsClass, dayjsFactory) => {
   dayjsFactory.extend(utc)
+  dayjsFactory.extend(weekOfYear)
 
   var Interval = (function () {
     function createInterval(units, measure) {
@@ -57,7 +59,7 @@ export default (option, dayjsClass, dayjsFactory) => {
 
   var Calendar = (function () {
     // Dictionary of unit types based on measures
-    var unitTypes = {
+    const unitTypes = {
       daysOfMonth: 'date',
       daysOfWeek: 'day',
       weeksOfMonth: 'monthWeek',
@@ -66,14 +68,23 @@ export default (option, dayjsClass, dayjsFactory) => {
       monthsOfYear: 'month',
     }
 
-    // Dictionary of ranges based on measures
-    var ranges = {
+    const ranges = {
       daysOfMonth: { low: 1, high: 31 },
       daysOfWeek: { low: 0, high: 6 },
       weeksOfMonth: { low: 0, high: 4 },
       weeksOfMonthByDay: { low: 0, high: 4 },
       weeksOfYear: { low: 0, high: 52 },
       monthsOfYear: { low: 0, high: 11 },
+    }
+
+    const weekDays = {
+      Sunday: 0,
+      Monday: 1,
+      Tuesday: 2,
+      Wednesday: 3,
+      Thursday: 4,
+      Friday: 5,
+      Saturday: 6,
     }
 
     // Private function for checking the range of calendar values
@@ -98,7 +109,11 @@ export default (option, dayjsClass, dayjsFactory) => {
             unitInt = unit
           }
 
-          unitNum = dayjsFactory().set(nameType, unitInt).get(nameType)
+          if (nameType === 'days' && isNaN(unitInt)) {
+            unitNum = dayjsFactory().set('day', weekDays[unitInt]).get('day')
+          } else {
+            unitNum = dayjsFactory().set(nameType, unitInt).get(nameType)
+          }
           newList[unitNum] = list[unit]
         }
       }
@@ -297,9 +312,9 @@ export default (option, dayjsClass, dayjsFactory) => {
       // Get the next N dates, if num is null then infinite
       while (dates.length < (num === null ? dates.length + 1 : num)) {
         if (type === 'next' || type === 'all') {
-          currentDate.add(1, 'day')
+          currentDate = currentDate.add(1, 'day')
         } else {
-          currentDate.subtract(1, 'day')
+          currentDate = currentDate.subtract(1, 'day')
         }
 
         //console.log("Match: " + currentDate.format("L") + " - " + this.matches(currentDate, true));
@@ -522,16 +537,16 @@ export default (option, dayjsClass, dayjsFactory) => {
       var data = {}
 
       if (this.start && dayjsFactory(this.start).isValid()) {
-        data.start = this.start.format('L')
+        data.start = this.start.format('YYYY-MM-DD')
       }
 
       if (this.end && dayjsFactory(this.end).isValid()) {
-        data.end = this.end.format('L')
+        data.end = this.end.format('YYYY-MM-DD')
       }
 
       data.exceptions = []
       for (var i = 0, len = this.exceptions.length; i < len; i++) {
-        data.exceptions.push(this.exceptions[i].format('L'))
+        data.exceptions.push(this.exceptions[i].format('YYYY-MM-DD'))
       }
 
       data.rules = this.rules
