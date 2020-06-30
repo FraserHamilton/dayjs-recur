@@ -1,24 +1,19 @@
 {
   "name": "dayjs-recur",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "scripts": {
     "build": "rollup --config",
     "minify": "terser build/index.js --compress --mangle --output index.min.js",
     "build:minify": "yarn build && yarn minify",
     "test": "jest --watch"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "dayjs": "^1.8.28",
-    "moment": "^2.27.0",
-    "moment-recur": "^1.0.7"
+    "dayjs": "^1.8.28"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

@@ -3047,18 +3047,6 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
-moment-recur@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/moment-recur/-/moment-recur-1.0.7.tgz#4d5092af648aeded6afe5c13ef38c52901c99419"
-  integrity sha1-TVCSr2SK7e1q/lwT7zjFKQHJlBk=
-  dependencies:
-    moment "<3.0.0"
-
-moment@<3.0.0, moment@^2.27.0:
-  version "2.27.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
-  integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
