@@ -399,35 +399,26 @@ describe('All Dates', () => {
   })
 })
 
-// describe('Exceptions', function () {
-//   var mo, exception, recur, exceptionWithTz
+describe('Exceptions', () => {
+  var mo, exception, recur
 
-//   beforeEach(function () {
-//     mo = moment(startDate)
-//     exception = mo.clone().add(3, 'day')
-//     recur = mo.clone().recur().every(1, 'days')
-//     exceptionWithTz = moment.tz(
-//       exception.format('YYYY-MM-DD'),
-//       'Asia/Hong_Kong'
-//     )
-//   })
+  beforeEach(() => {
+    mo = dayjs(startDate)
+    exception = mo.clone().add(3, 'day')
+    recur = mo.clone().recur().every(1, 'days')
+  })
 
-//   test('should prevent exception days from matching', function () {
-//     recur.except(exception)
-//     expect(recur.matches(exception)).toBe(false)
-//   })
+  test('should prevent exception days from matching', () => {
+    recur.except(exception)
+    expect(recur.matches(exception)).toBe(false)
+  })
 
-//   test('should work when the passed in exception is in a different time zone', function () {
-//     recur.except(exception)
-//     expect(recur.matches(exceptionWithTz)).toBe(false)
-//   })
-
-//   test('should be removable', function () {
-//     recur.except(exception)
-//     recur.forget(exception)
-//     expect(recur.matches(exception)).toBe(true)
-//   })
-// })
+  test('should be removable', () => {
+    recur.except(exception)
+    recur.forget(exception)
+    expect(recur.matches(exception)).toBe(true)
+  })
+})
 
 describe('Options', () => {
   test('should be importable', () => {
