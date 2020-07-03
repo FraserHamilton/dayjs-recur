@@ -1,5 +1,7 @@
 # dayjs-recur
 
+This is a plugin for [Day.js](https://github.com/iamkun/dayjs) that allows you to work with recurring dates. This plugin only handles dates, any time information is discarded.
+
 ## Getting Started
 
 The following guide will help you install and use this plugin with Day.js
