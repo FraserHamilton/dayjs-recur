@@ -123,7 +123,7 @@ You may also pass the units directly to the interval functions (listed below) in
 const recurrence = dayjs.recur().monthOfYear("January");
 ```
 
-### Length Intervals
+#### Length Intervals
 dayjs-recur supports intervals for days, weeks, months, and years. Measurements may be singular or plural (ex: `day()` vs `days()`). Length Intervals **must** have a start date defined.
 
 Possible Length Intervals Include:
@@ -132,7 +132,7 @@ Possible Length Intervals Include:
 * month / months
 * year / years
 
-#### Examples
+##### Examples
 ```js
 // Create a date to start from
 const myDate = dayjs("01/01/2020");
@@ -157,7 +157,7 @@ const interval = myDate.recur().every(3).days().every(2).months(); // Won't work
 ```
 
 
-### Calendar Intervals
+#### Calendar Intervals
 Calendar Intervals do not depend on a start date. They define a unit of another unit. For instance, a day of a month, or a month of a year. Measurements may be singular or plural (ex: `dayOfMonth()` vs `daysOfMonth()`).
 
 Possible Calendar Intervals Include:
@@ -167,7 +167,7 @@ Possible Calendar Intervals Include:
 * weekOfYear / weeksOfYear
 * monthOfYear / monthsOfYear
 
-#### Examples
+##### Examples
 ```js
 // Will match any date that is on Sunday or Monday.
 const cal = dayjs.recur().every(["Sunday", 1]).daysOfWeek();
