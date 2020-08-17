@@ -248,22 +248,22 @@ recurrence.forget("days");
 It is also possible to generate dates from the rules. These functions require a starting date.
 
 ```js
-var recurrence, nextDates;
+ let nextDates;
 
 // Create a recurrence
-recurrence = dayjs("01/01/2020").recur().every(2).days();
+const recurrence = dayjs("01/01/2020").recur().every(2).days();
 
 // Generate the next three dates as dayjs instances
 // Outputs: [dayjs("01/03/2020"), dayjs("01/05/2020"), dayjs("01/07/2020")]
 nextDates = recurrence.next(3); 
 
-// Generate the next three dates, formatted in local format
+// Generate the next three dates
 // Outputs: ["01/03/2020", "01/05/2020", "01/07/2020"]
-nextDates = recurrence.next(3, "L");
+nextDates = recurrence.next(3);
 
-// Generate previous three dates, formatted in local format
+// Generate previous three dates
 // Outputs: ["12/30/2020", "12/28/2020", "12/26/2020"]
-nextDates = recurrence.previous(3, "L");
+nextDates = recurrence.previous(3);
 ```
 
 If your recurrence does not have a start date set, or if it does but you want to start at a different date, use the `fromDate()` method first.
@@ -272,7 +272,7 @@ const recurrence = dayjs("01/01/2020").recur().every(2).days();
 recurrence.fromDate("02/05/2020");
 
 // Outputs: ["02/06/2020", "02/08/2020", "02/10/2020"]
-nextDates = recurrence.next(3, "L");
+nextDates = recurrence.next(3);
 ```
 
 With both a start date and an end date set, you can generate all dates within that range that match the pattern (including the start/end dates).
@@ -280,7 +280,7 @@ With both a start date and an end date set, you can generate all dates within th
 const recurrence = dayjs().recur("01/01/2020", "01/07/2020").every(2).days();
 
 // Outputs: ["01/01/2020", "01/03/2020", "01/05/2020", "01/07/2020"]
-allDates = recurrence.all("L");
+allDates = recurrence.all();
 ```
 
 
