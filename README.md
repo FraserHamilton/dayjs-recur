@@ -52,7 +52,7 @@ You can create a recurrence from an instance of dayjs or from the constructor a 
 
 ```javascript 
 // Create a recurrence using today as the start date.
-const recurrence = moment().recur();
+const recurrence = dayjs().recur();
  
 // Create a recurrence while passing the start and end dates to the recur function.
 // Note: passing an end date requires you to also pass a start date.
@@ -192,7 +192,7 @@ const valentines = dayjs.recur().every(14).daysOfMonth()
 // A weekOfMonthByDay interval is available for combining with
 // the daysOfWeek to achieve "nth weekday of month" recurrences.
 // The following matches every 1st and 3rd Thursday of the month.
-// (Note this cannot be combined at the moment with every(x).months() expression) 
+// (Note this cannot be combined at the dayjs with every(x).months() expression) 
 const cal = dayjs.recur().every("Thursday").daysOfWeek()
                     .every([0, 2]).weeksOfMonthByDay();
 
@@ -253,8 +253,8 @@ var recurrence, nextDates;
 // Create a recurrence
 recurrence = dayjs("01/01/2020").recur().every(2).days();
 
-// Generate the next three dates as moments
-// Outputs: [dayjs("03/01/2020"), moment("05/01/2020"), moment("07/01/2020")]
+// Generate the next three dates as dayjs instances
+// Outputs: [dayjs("03/01/2020"), dayjs("05/01/2020"), dayjs("07/01/2020")]
 nextDates = recurrence.next(3); 
 
 // Generate the next three dates, formatted in local format
