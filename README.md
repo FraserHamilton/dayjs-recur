@@ -201,6 +201,92 @@ const cal = dayjs.recur().every(dayjs("01/01/2020").day()).daysOfWeek()
 
 ```
 
+### Using the Rules
+#### Matching
+The `matches()` function will test a date to check if all of the recurrence rules match. It returns `true` if the date matches, `false` otherwise.
+```js
+const interval = dayjs("01/01/2020").recur().every(2).days();
+interval.matches("02/01/2020"); // false
+interval.matches("03/01/2020"); // true
+```
+
+You may also see if a date matches before the start date or after the end date by passing `true` as the second argument to `matches()`.
+```js
+const interval = dayjs("01/01/2020").recur().every(2).days();
+interval.matches("30/12/2019"); // false
+interval.matches("30/12/2019", true); // true
+```
+
+#### Exceptions
+To prevent a date from matching that would normally match, use the `except()` function.
+
+```js
+const recurrence = dayjs("01/01/2020").recur().every(1).day().except("02/01/2020");
+recurrence.matches("02/01/2020"); // false
+```
+
+
+#### Overriding and Forgetting
+If a rule is created with the same measurement of a previous rule, it will override the previous rule. Rules can also be removed from a recurrence.
+
+```js
+// Create a recurrence that matches every day, with an exception
+const recurrence = dayjs("01/01/2020").recur().every(1).day().except("03/01/2020");
+
+// This will override the previous rule and match every 2 days instead.
+recurrence.every(2).days();
+
+// Exceptions can also be removed by passing a date to the forget() function.
+recurrence.forget("03/01/2020");
+
+// Rules can be removed by passing the measurement to the forget() function.
+recurrence.forget("days");
+```
+
+
+#### Generating Dates
+It is also possible to generate dates from the rules. These functions require a starting date.
+
+```js
+var recurrence, nextDates;
+
+// Create a recurrence
+recurrence = dayjs("01/01/2020").recur().every(2).days();
+
+// Generate the next three dates as moments
+// Outputs: [dayjs("03/01/2020"), moment("05/01/2020"), moment("07/01/2020")]
+nextDates = recurrence.next(3); 
+
+// Generate the next three dates, formatted in local format
+// Outputs: ["03/01/2020", "05/01/2020", "07/01/2020"]
+nextDates = recurrence.next(3, "L");
+
+// Generate previous three dates, formatted in local format
+// Outputs: ["30/12/2020", "28/12/2020", "26/12/2020"]
+nextDates = recurrence.previous(3, "L");
+```
+
+If your recurrence does not have a start date set, or if it does but you want to start at a different date, use the `fromDate()` method first.
+```js
+const recurrence = dayjs("01/01/2020").recur().every(2).days();
+recurrence.fromDate("05/02/2020");
+
+// Outputs: ["06/02/2020", "08/02/2020", "10/02/2020"]
+nextDates = recurrence.next(3, "L");
+```
+
+With both a start date and an end date set, you can generate all dates within that range that match the pattern (including the start/end dates).
+```js
+const recurrence = dayjs().recur("01/01/2020", "07/01/2020").every(2).days();
+
+// Outputs: ["01/01/2020", "03/01/2020", "05/01/2020", "07/01/2020"]
+allDates = recurrence.all("L");
+```
+
+
+**Important Note:** These functions may be very inefficient/slow. They work by attempting to match every date from the start of a range until the desired number of dates have been generated. So if you attempt to get 10 dates for a rule that matches once a year, it will run the match function for ~3650 days.
+
+
 ## Local Development and Contributing
 
 We are more than happy to accept PRs for bugs, improvements or new features.
