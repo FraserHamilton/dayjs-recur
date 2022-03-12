@@ -1,6 +1,6 @@
 {
   "name": "dayjs-recur",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Day.js plugin for matching and generating recurring dates.",
   "main": "index.min.js",
   "module": "index.min.js",
